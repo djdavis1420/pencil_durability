@@ -9,4 +9,5 @@ class Paper:
         substring_information = {}
         substring_information['substring_length'] = len(string_to_erase)
         substring_information['starting_index'] = self.text.rindex(string_to_erase)
+        substring_information['ending_index'] = (substring_information['starting_index'] + substring_information['substring_length']) - 1
         return substring_information

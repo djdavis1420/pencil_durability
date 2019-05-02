@@ -38,4 +38,4 @@ class TestPaper:
 
         actual = self.paper.locate_substring(string_to_erase)
 
-        assert actual == {'substring_length': 3, 'starting_index': 40}
+        assert actual == {'substring_length': 3, 'starting_index': 40, 'ending_index': 42}
