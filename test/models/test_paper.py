@@ -31,3 +31,11 @@ class TestPaper:
         self.paper.write(character)
 
         assert self.paper.text == 'A Z'
+
+    def test_locate_substring__should_return_dictionary_with_substring_information_for_last_occurrence_in_populated_text_property(self):
+        self.paper.text = 'The rain in Spain falls mainly on the plain'
+        string_to_erase = 'ain'
+
+        actual = self.paper.locate_substring(string_to_erase)
+
+        assert actual == {'substring_length': 3, 'starting_index': 40}
