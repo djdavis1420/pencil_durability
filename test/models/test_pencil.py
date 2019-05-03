@@ -140,3 +140,14 @@ class TestPencil:
 
         assert self.pencil.remaining_durability == 487
         assert mock_paper.text == 'The @@@@i@@t@@@@@ falls mainly on the plain.'
+
+    def test_edit_on_paper__should_write_word_fog_to_blank_spaces_left_by_erased_word_rain(self):
+        mock_paper = Mock()
+        starting_index = 4
+        string_to_write = 'fog'
+        mock_paper.text = 'The      in Spain falls mainly on the plain.'
+
+        self.pencil.edit_on_paper(mock_paper, string_to_write, starting_index)
+
+        assert self.pencil.remaining_durability == 497
+        assert mock_paper.text == 'The fog  in Spain falls mainly on the plain.'
