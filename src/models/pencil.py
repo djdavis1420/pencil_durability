@@ -30,9 +30,11 @@ class Pencil:
         string_being_erased = ''
 
         for char in string_to_erase[::-1]:
-            if self.eraser > 0:
+            if self.eraser > 0 and char != ' ':
                 string_being_erased = string_being_erased + ' '
                 self.eraser -= 1
+            elif self.eraser > 0 and char == ' ':
+                string_being_erased = string_being_erased + ' '
             else:
                 string_being_erased = char + string_being_erased
 
