@@ -62,3 +62,14 @@ class TestPencil:
 
         assert self.pencil.eraser == 47
         assert mock_paper.text == 'The rain in Spain falls mainly on the pl   .'
+
+    def test_erase_from_paper__should_reduce_eraser_durability_by_three_and_erase_second_occurrence_of_string_from_paper(self):
+        mock_paper = Mock()
+        string_to_erase = 'ain'
+        mock_paper.text = 'The rain in Spain falls mainly on the pl   .'
+        mock_paper.locate_substring.return_value = {'substring_length': 3, 'starting_index': 25, 'ending_index': 27}
+
+        self.pencil.erase_from_paper(mock_paper, string_to_erase)
+
+        assert self.pencil.eraser == 47
+        assert mock_paper.text == 'The rain in Spain falls m   ly on the pl   .'
