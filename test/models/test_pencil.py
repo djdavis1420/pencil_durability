@@ -118,3 +118,25 @@ class TestPencil:
 
         assert self.pencil.remaining_durability == 496
         assert mock_paper.text == 'The snow in Spain falls mainly on the plain.'
+
+    def test_edit_on_paper__should_write_five_letters_and_two_at_symbols_starting_where_word_rain_had_been_erased(self):
+        mock_paper = Mock()
+        starting_index = 4
+        string_to_write = 'snowing'
+        mock_paper.text = 'The      in Spain falls mainly on the plain.'
+
+        self.pencil.edit_on_paper(mock_paper, string_to_write, starting_index)
+
+        assert self.pencil.remaining_durability == 493
+        assert mock_paper.text == 'The snowi@@ Spain falls mainly on the plain.'
+
+    def test_edit_on_paper__should_overwrite_word_rain_and_subsequent_characters_with_word_precipitation(self):
+        mock_paper = Mock()
+        starting_index = 4
+        string_to_write = 'precipitation'
+        mock_paper.text = 'The rain in Spain falls mainly on the plain.'
+
+        self.pencil.edit_on_paper(mock_paper, string_to_write, starting_index)
+
+        assert self.pencil.remaining_durability == 487
+        assert mock_paper.text == 'The @@@@i@@t@@@@@ falls mainly on the plain.'
