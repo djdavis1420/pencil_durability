@@ -40,3 +40,20 @@ class Pencil:
 
         new_text = text_before_string_to_erase + string_being_erased + text_after_string_to_erase
         paper.text = new_text
+
+    def edit_on_paper(self, paper, string_to_write, starting_index):
+        ending_index = (starting_index + len(string_to_write)) - 1
+        text_before_string_to_write = paper.text[:starting_index:]
+        text_after_string_to_write = paper.text[ending_index + 1::]
+        substring_to_edit = paper.text[starting_index::]
+        edited_string = ''
+
+        i = 0
+        for char in string_to_write:
+            if substring_to_edit[i] != ' ':
+                edited_string += '@'
+                self.remaining_durability -= 1
+                i += 1
+
+        new_text = text_before_string_to_write + edited_string + text_after_string_to_write
+        paper.text = new_text
