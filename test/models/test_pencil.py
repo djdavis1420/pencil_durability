@@ -1,3 +1,5 @@
+from mock import Mock
+
 from src.models.pencil import Pencil
 from src.models.paper import Paper
 
@@ -49,3 +51,14 @@ class TestPencil:
 
         assert self.pencil.remaining_durability == 0
         assert self.paper.text == 'Hello\n     '
+
+    def test_erase_from_paper__should_reduce_eraser_durability_by_three_and_erase_first_occurrence_of_string_from_paper(self):
+        mock_paper = Mock()
+        string_to_erase = 'ain'
+        mock_paper.text = 'The rain in Spain falls mainly on the plain.'
+        mock_paper.locate_substring.return_value = {'substring_length': 3, 'starting_index': 40, 'ending_index': 42}
+
+        self.pencil.erase_from_paper(mock_paper, string_to_erase)
+
+        assert self.pencil.eraser == 47
+        assert mock_paper.text == 'The rain in Spain falls mainly on the pl   .'
