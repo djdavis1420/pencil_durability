@@ -107,3 +107,14 @@ class TestPencil:
 
         assert self.pencil.remaining_durability == 496
         assert mock_paper.text == 'The @@@@ in Spain falls mainly on the plain.'
+
+    def test_edit_on_paper__should_replace_four_blank_spaces_where_word_rain_had_been_erased_with_word_snow(self):
+        mock_paper = Mock()
+        starting_index = 4
+        string_to_write = 'snow'
+        mock_paper.text = 'The      in Spain falls mainly on the plain.'
+
+        self.pencil.edit_on_paper(mock_paper, string_to_write, starting_index)
+
+        assert self.pencil.remaining_durability == 496
+        assert mock_paper.text == 'The snow in Spain falls mainly on the plain.'

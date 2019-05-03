@@ -54,6 +54,10 @@ class Pencil:
                 edited_string += '@'
                 self.remaining_durability -= 1
                 i += 1
+            elif substring_to_edit[i] == ' ':
+                edited_string += char
+                self.remaining_durability -= 1
+                i += 1
 
         new_text = text_before_string_to_write + edited_string + text_after_string_to_write
         paper.text = new_text
