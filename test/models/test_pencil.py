@@ -73,3 +73,15 @@ class TestPencil:
 
         assert self.pencil.eraser == 47
         assert mock_paper.text == 'The rain in Spain falls m   ly on the pl   .'
+
+    def test_erase_from_paper__should_reduce_eraser_durability_by_three_to_zero_and_partially_erase_string_from_paper_due_to_no_eraser(self):
+        self.pencil.eraser = 3
+        mock_paper = Mock()
+        string_to_erase = 'Spain'
+        mock_paper.text = 'The rain in Spain falls mainly on the plain.'
+        mock_paper.locate_substring.return_value = {'substring_length': 5, 'starting_index': 12, 'ending_index': 16}
+
+        self.pencil.erase_from_paper(mock_paper, string_to_erase)
+
+        assert self.pencil.eraser == 0
+        assert mock_paper.text == 'The rain in Sp    falls mainly on the plain.'
