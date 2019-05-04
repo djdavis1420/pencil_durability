@@ -42,7 +42,7 @@ class Pencil:
         paper.text = new_text
 
     def edit_on_paper(self, paper, string_to_write, starting_index):
-        ending_index = (starting_index + len(string_to_write)) - 1
+        ending_index = self.__get_ending_index(paper, string_to_write, starting_index)
         original_text_as_list = [char for char in paper.text]
         new_text_as_list = []
 
@@ -61,6 +61,15 @@ class Pencil:
                     j += 1
 
         paper.text = self.__make_string_from_list(new_text_as_list)
+
+    @staticmethod
+    def __get_ending_index(paper, string_to_write, starting_index):
+        if starting_index + len(string_to_write) <= len(paper.text):
+            return (starting_index + len(string_to_write)) - 1
+        else:
+            difference = (starting_index + len(string_to_write)) - len(paper.text)
+            paper.text += ' ' * difference
+            return len(paper.text) - 1
 
     @staticmethod
     def __make_string_from_list(new_text_as_list):

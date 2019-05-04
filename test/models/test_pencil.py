@@ -151,3 +151,14 @@ class TestPencil:
 
         assert self.pencil.remaining_durability == 497
         assert mock_paper.text == 'The fog  in Spain falls mainly on the plain.'
+
+    def test_edit_on_paper__should_write_word_grassland_over_word_plain_and_extend_full_text(self):
+        mock_paper = Mock()
+        starting_index = 38
+        string_to_write = 'grassland.'
+        mock_paper.text = 'The rain in Spain falls mainly on the plain.'
+
+        self.pencil.edit_on_paper(mock_paper, string_to_write, starting_index)
+
+        assert self.pencil.remaining_durability == 490
+        assert mock_paper.text == 'The rain in Spain falls mainly on the @@@@@@and.'
