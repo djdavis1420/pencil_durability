@@ -43,21 +43,28 @@ class Pencil:
 
     def edit_on_paper(self, paper, string_to_write, starting_index):
         ending_index = (starting_index + len(string_to_write)) - 1
-        text_before_string_to_write = paper.text[:starting_index:]
-        text_after_string_to_write = paper.text[ending_index + 1::]
-        substring_to_edit = paper.text[starting_index::]
-        edited_string = ''
+        original_text_as_list = [char for char in paper.text]
+        new_text_as_list = []
 
-        i = 0
-        for char in string_to_write:
-            if substring_to_edit[i] != ' ':
-                edited_string += '@'
-                self.remaining_durability -= 1
-                i += 1
-            elif substring_to_edit[i] == ' ':
-                edited_string += char
-                self.remaining_durability -= 1
-                i += 1
+        j = 0
+        for i, char in enumerate(original_text_as_list):
+            if i < starting_index or i > ending_index:
+                new_text_as_list.append(char)
+            else:
+                if original_text_as_list[i] == ' ':
+                    new_text_as_list.append(string_to_write[j])
+                    self.remaining_durability -= 1
+                    j += 1
+                elif original_text_as_list[i] != ' ':
+                    new_text_as_list.append('@')
+                    self.remaining_durability -= 1
+                    j += 1
 
-        new_text = text_before_string_to_write + edited_string + text_after_string_to_write
-        paper.text = new_text
+        paper.text = self.__make_string_from_list(new_text_as_list)
+
+    @staticmethod
+    def __make_string_from_list(new_text_as_list):
+        new_text_as_string = ''
+        for char in new_text_as_list:
+            new_text_as_string += char
+        return new_text_as_string
