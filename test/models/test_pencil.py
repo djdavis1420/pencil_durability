@@ -162,3 +162,15 @@ class TestPencil:
 
         assert self.pencil.remaining_durability == 490
         assert mock_paper.text == 'The rain in Spain falls mainly on the @@@@@@and.'
+
+    def test_edit_on_paper__should_write_partial_word_snow_on_spaces_left_by_word_rain(self):
+        self.pencil.remaining_durability = 2
+        mock_paper = Mock()
+        starting_index = 4
+        string_to_write = 'snow'
+        mock_paper.text = 'The      in Spain falls mainly on the plain.'
+
+        self.pencil.edit_on_paper(mock_paper, string_to_write, starting_index)
+
+        assert self.pencil.remaining_durability == 0
+        assert mock_paper.text == 'The sn   in Spain falls mainly on the plain.'

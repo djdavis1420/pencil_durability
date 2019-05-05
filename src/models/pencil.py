@@ -51,7 +51,9 @@ class Pencil:
             if i < starting_index or i > ending_index:
                 new_text_as_list.append(char)
             else:
-                if original_text_as_list[i] == ' ':
+                if self.remaining_durability == 0:
+                    new_text_as_list.append(' ')
+                elif original_text_as_list[i] == ' ':
                     new_text_as_list.append(string_to_write[j])
                     self.remaining_durability -= 1
                     j += 1
