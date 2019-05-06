@@ -44,10 +44,10 @@ class Pencil:
     def edit_on_paper(self, paper, string_to_write, starting_index):
         ending_index = self.__get_ending_index(paper, string_to_write, starting_index)
         new_text_as_list = self.__parse_characters(paper, string_to_write, starting_index, ending_index)
-        paper.text = self.__make_string_from_list(new_text_as_list)
+        paper.text = ''.join(new_text_as_list)
 
     def __parse_characters(self, paper, string_to_write, starting_index, ending_index):
-        original_text_as_list = [char for char in paper.text]
+        original_text_as_list = list(paper.text)
         new_text_as_list = []
         j = 0
         for i, char in enumerate(original_text_as_list):
@@ -74,10 +74,3 @@ class Pencil:
             difference = (starting_index + len(string_to_write)) - len(paper.text)
             paper.text += ' ' * difference
             return len(paper.text) - 1
-
-    @staticmethod
-    def __make_string_from_list(new_text_as_list):
-        new_text_as_string = ''
-        for char in new_text_as_list:
-            new_text_as_string += char
-        return new_text_as_string
