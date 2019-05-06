@@ -43,28 +43,8 @@ class Pencil:
 
     def edit_on_paper(self, paper, string_to_write, starting_index):
         ending_index = self.__get_ending_index(paper, string_to_write, starting_index)
-        new_text_as_list = self.__parse_characters(paper, string_to_write, starting_index, ending_index)
+        new_text_as_list = paper.edit(self, string_to_write, starting_index, ending_index)
         paper.text = ''.join(new_text_as_list)
-
-    def __parse_characters(self, paper, string_to_write, starting_index, ending_index):
-        original_text_as_list = list(paper.text)
-        new_text_as_list = []
-        j = 0
-        for i, char in enumerate(original_text_as_list):
-            if i < starting_index or i > ending_index:
-                new_text_as_list.append(char)
-            else:
-                if self.remaining_durability == 0:
-                    new_text_as_list.append(' ')
-                elif original_text_as_list[i] == ' ':
-                    new_text_as_list.append(string_to_write[j])
-                    self.remaining_durability -= 1
-                    j += 1
-                elif original_text_as_list[i] != ' ':
-                    new_text_as_list.append('@')
-                    self.remaining_durability -= 1
-                    j += 1
-        return new_text_as_list
 
     @staticmethod
     def __get_ending_index(paper, string_to_write, starting_index):
