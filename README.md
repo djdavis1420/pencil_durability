@@ -19,9 +19,10 @@ IntelliJ IDEA with Python Plugin (or PyCharm)
 ## Contents
 
  - src/models/pencil.py controls the exercise and the limitations associated with the pencil
- - test/models/pencil.py tests most of the functionality for writing, erasing, and editing text
- - src/models/paper.py includes supporting methods
- - test/models/paper tests these supporting methods
+ - src/models/paper.py includes supporting methods to erase and edit text
+ - test/unit/models/test_pencil.py tests most of the functionality for writing, erasing, and editing text
+ - test/unit/models/test_paper.py tests paper specific methods
+ - test/integration/test_pencil.py specifically tests text editing and the related interactions between paper and pencil
 
 ## Built With
 
