@@ -8,6 +8,23 @@ class TestIntegration:
         self.pencil = Pencil(500, 20, 50)
         self.paper = Paper()
 
+    def test_write_to_paper__should_reduce_pencil_durability_by_twelve_and_write_full_string_to_paper(self):
+        string_to_write = 'Hello World'
+
+        self.pencil.write_to_paper(self.paper, string_to_write)
+
+        assert self.pencil.remaining_durability == 488
+        assert self.paper.text == 'Hello World'
+
+    def test_write_to_paper__should_reduce_pencil_durability_by_six_to_zero_and_write_partial_string_to_paper(self):
+        self.pencil.remaining_durability = 6
+        string_to_write = 'Hello\nWorld'
+
+        self.pencil.write_to_paper(self.paper, string_to_write)
+
+        assert self.pencil.remaining_durability == 0
+        assert self.paper.text == 'Hello\n     '
+
     def test_edit_on_paper__should_replace_word_rain_with_four_at_symbols_instead_of_word_snow(self):
         starting_index = 4
         string_to_write = 'snow'

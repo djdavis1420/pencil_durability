@@ -33,25 +33,6 @@ class TestPencil:
         assert self.pencil.remaining_durability == 5
         assert self.pencil.length == 0
 
-    def test_write_to_paper__should_reduce_pencil_durability_by_twelve_and_write_full_string_to_paper(self):
-        self.paper = Paper()
-        string_to_write = 'Hello World'
-
-        self.pencil.write_to_paper(self.paper, string_to_write)
-
-        assert self.pencil.remaining_durability == 488
-        assert self.paper.text == 'Hello World'
-
-    def test_write_to_paper__should_reduce_pencil_durability_by_six_to_zero_and_write_partial_string_to_paper(self):
-        self.paper = Paper()
-        self.pencil.remaining_durability = 6
-        string_to_write = 'Hello\nWorld'
-
-        self.pencil.write_to_paper(self.paper, string_to_write)
-
-        assert self.pencil.remaining_durability == 0
-        assert self.paper.text == 'Hello\n     '
-
     def test_erase_from_paper__should_reduce_eraser_durability_by_three_and_erase_first_occurrence_of_string_from_paper(self):
         mock_paper = Mock()
         string_to_erase = 'ain'
